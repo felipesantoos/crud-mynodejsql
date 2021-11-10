@@ -55,7 +55,7 @@ Um CRUD feito com Node.js e MySQL.
    # Rotas
    > Sugiro testar as requições no Insomnia.
    ## Criar novo cliente
-   > **GET** http://localhost:3000/customers/create
+   > **POST** http://localhost:3000/customers/create
    ```json
    {
 	   "cpf": "450.222.240-20",
@@ -63,3 +63,21 @@ Um CRUD feito com Node.js e MySQL.
 	   "birthDate": "2001-01-01"
    }
    ```
+   ## Listar os dados de todos os clientes
+   > **GET** http://localhost:3000/customers/read
+   ## Listar os dados de um cliente específico
+   > **GET** http://localhost:3000/customers/read/:id
+   - Onde `:id` é um número que representa a **chave primária** do cliente no banco de dados.
+   ## Atualizar os dados de um cliente específico
+   > **PUT** http://localhost:3000/customers/update/:id
+   - Onde `:id` é um número que representa a **chave primária** do cliente no banco de dados.
+   ```json
+   {
+   	"cpf": "914.167.530-44",
+	"name": "Sarah Saldanha Vigário",
+	"birthDate": "2002-02-02"
+   }
+   ```
+   ## Remover um cliente específico
+   > **DELETE** http://localhost:3000/customers/delete/1
+   - Onde `:id` é um número que representa a **chave primária** do cliente no banco de dados.
