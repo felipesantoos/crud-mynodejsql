@@ -9,7 +9,7 @@ Um CRUD feito com Node.js e MySQL.
 # Tarefas
 - [x] Criar esquema do banco de dados;
 - [x] Criar projeto em Node.js;
-- [ ] Realizar a conexão com o banco de dados;
+- [x] Realizar a conexão com o banco de dados;
 - [ ] Criar as rotas de cadastro, listagem (geral e individual), atualização e remoção;
 - [ ] Criar as funções de cadastro, listagem (geral e individual), atualização e remoção;
 
@@ -18,14 +18,25 @@ Um CRUD feito com Node.js e MySQL.
 2. Entre na pasta do projeto com o comando `cd crud-mynodejsql`.
 3. Adicione o package.json com o comando `yarn init -y`.
 4. Adicione a dependência `express` com o comando `yarn add express`.
-5. Caso vá desenvolver, adicione a dependência `nodemon` com o comando `yarn add nodemon -D` e adicione o seguinte trecho de código no package.json:
+5. Adicione a dependência `mysql` com o comando `yarn add mysql`.
+6. 8. Caso tenha instalado o nodemon e queira que o servidor reinicia toda vez que você salvar as alterações que fez, rode o projeto com o comando `yarn dev`.
+7. Altere os dados do objeto que é argumento do método createConnection para os dados do seu MySQL:
+   ```javascript
+   const con = mysql.createConnection({
+      host: "localhost", // seu computador
+      user: "root", // seu usuário do mysql
+      password: "", // sua senha do mysql
+      database: "supermarket" // seu banco no mysql
+   });
+   ```
+8. Se a conexão com o banco retornar o erro `Client does not support authentication protocol requested by server; consider upgrading MySQL client`, execute o comando `ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';` e `flush privileges;` no MySQL, substituído "password" pela senha que você está usando na conexão com o banco.
+9. Caso vá desenvolver, adicione a dependência `nodemon` com o comando `yarn add nodemon -D` e adicione o seguinte trecho de código no package.json:
    ```json
    "scripts": {
     "dev": "nodemon index.js"
    }
    ```
-7. Caso não tenha adicionado o nodemon e/ou não queira reiniciar o servidor toda vez que salvar as alterações feitas, rode o projeto com o comando `node index.js`.
-8. Caso tenha instalado o nodemon e queira que o servidor reinicia toda vez que você salvar as alterações que fez, rode o projeto com o comando `yarn dev`.
+10. Caso não tenha adicionado o nodemon e/ou não queira reiniciar o servidor toda vez que salvar as alterações feitas, rode o projeto com o comando `node index.js`.
 
 # Como criar o banco de dados
 1. No Linux, abra o terminal e digite `sudo mysql` seguido da sua senha.
