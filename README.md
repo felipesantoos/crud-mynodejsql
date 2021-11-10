@@ -10,7 +10,7 @@ Um CRUD feito com Node.js e MySQL.
 - [x] Criar esquema do banco de dados;
 - [x] Criar projeto em Node.js;
 - [x] Realizar a conexão com o banco de dados;
-- [ ] Criar as rotas de cadastro, listagem (geral e individual), atualização e remoção;
+- [x] Criar as rotas de cadastro, listagem (geral e individual), atualização e remoção;
 - [ ] Criar as funções de cadastro, listagem (geral e individual), atualização e remoção;
 
 # Como rodar este projeto
@@ -51,4 +51,15 @@ Um CRUD feito com Node.js e MySQL.
       name VARCHAR(200) NOT NULL,
       birthDate DATE
    );
+   ```
+   # Rotas
+   > Sugiro testar as requições no Insomnia.
+   ## Criar novo cliente
+   > **GET** http://localhost:3000/customers/create
+   ```json
+   {
+	   "cpf": "450.222.240-20",
+	   "name": "Jesus Costa Lousada",
+	   "birthDate": "2001-01-01"
+   }
    ```
