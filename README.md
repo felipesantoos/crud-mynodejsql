@@ -7,7 +7,7 @@ Um CRUD feito com Node.js e MySQL.
 - Criar um servidor local com Node.js que permita o cadastro, listagem (geral e individual), atualização e remoção de clientes de um banco de dados criado com o SGBD MySQL.
 
 # Tarefas
-- [ ] Criar esquema do banco de dados;
+- [x] Criar esquema do banco de dados;
 - [x] Criar projeto em Node.js;
 - [ ] Realizar a conexão com o banco de dados;
 - [ ] Criar as rotas de cadastro, listagem (geral e individual), atualização e remoção;
@@ -26,3 +26,18 @@ Um CRUD feito com Node.js e MySQL.
    ```
 7. Caso não tenha adicionado o nodemon e/ou não queira reiniciar o servidor toda vez que salvar as alterações feitas, rode o projeto com o comando `node index.js`.
 8. Caso tenha instalado o nodemon e queira que o servidor reinicia toda vez que você salvar as alterações que fez, rode o projeto com o comando `yarn dev`.
+
+# Como criar o banco de dados
+1. No Linux, abra o terminal e digite `sudo mysql` seguido da sua senha.
+2. Crie o banco de dados `supermarket` com os comandos abaixo:
+   ```sql
+   CREATE DATABASE IF NOT EXISTS supermarket;
+   USE supermarket;
+
+   CREATE TABLE customer(
+      id SERIAL PRIMARY KEY,
+      cpf VARCHAR(14) NOT NULL,
+      name VARCHAR(200) NOT NULL,
+      birthDate DATE
+   );
+   ```
