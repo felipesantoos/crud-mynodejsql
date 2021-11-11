@@ -1,0 +1,18 @@
+{
+  "name": "crud-mynodejsql",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/felipesantosds/crud-mynodejsql.git",
+  "author": "felipesantosds <felipedssantos.dev@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
