@@ -58,9 +58,9 @@ Um CRUD feito com Node.js e MySQL.
    > **POST** http://localhost:3000/customers/create
    ```json
    {
-	   "cpf": "450.222.240-20",
-	   "name": "Jesus Costa Lousada",
-	   "birthDate": "2001-01-01"
+	"cpf": "450.222.240-20",
+	"name": "Jesus Costa Lousada",
+	"birthDate": "2001-01-01"
    }
    ```
    ## Listar os dados de todos os clientes
@@ -73,7 +73,7 @@ Um CRUD feito com Node.js e MySQL.
    - Onde `:id` é um número que representa a **chave primária** do cliente no banco de dados.
    ```json
    {
-   	"cpf": "914.167.530-44",
+	"cpf": "914.167.530-44",
 	"name": "Sarah Saldanha Vigário",
 	"birthDate": "2002-02-02"
    }
