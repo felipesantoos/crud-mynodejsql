@@ -1,5 +1,6 @@
 // Módulo do MySQL.
 const mysql = require("mysql");
+const util = require("util");
 
 // Configurações da conexão.
 var db_config = {
@@ -9,21 +10,23 @@ var db_config = {
     database: "supermarket",
 };
 
-// Criação da variável de conexão.
-var connection = mysql.createConnection(db_config);
+function makeDb() {
+    console.log("Establishing a new database connection.");
 
-// Estabelecimento de uma nova conexão.
-connection.connect((err) => {
-    if (err) {
-        console.log("Cannot establish a connection with the database.");
+    const connection = mysql.createConnection(db_config);
 
-        connection = reconnect(connection);
-    } else {
-        console.log("New connection established with the database.");
-    }
-});
+    return {
+        query(sql, args) {
+            return util.promisify(connection.query).call(connection, sql, args);
+        },
+        close() {
+            console.log("Closing the database connection.");
 
-// Exportação das funções.
+            return util.promisify(connection.end).call(connection);
+        }
+    };
+}
+
 module.exports = {
-    connection: connection,
+    makeDb: makeDb,
 };

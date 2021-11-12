@@ -1,36 +1,78 @@
-const { connection } = require("../db/connection");
+const { getConnection, endConnection, makeDb } = require("../db/connection");
 
-function createCustomer(customer) {
+async function createCustomer(customer) {
     console.log("Repository: createCustomer");
 
+    const db = makeDb();
     var sql = "INSERT INTO customer (cpf, name, birthDate) VALUES ?";
     var values = [[customer.cpf, customer.name, customer.birthDate]];
 
-    connection.query(sql, [values], (err, result) => {
-        if (err) throw err;
+    try {
+        const result = await db.query(sql, [values]);
 
-        console.log("Number of records inserted: " + result.affectedRows);
-    });
+        return result.insertId;
+    } catch (err) {
+        throw err;
+    } finally {
+        await db.close();
+    }
 }
 
-function readAllCustomers() {
+async function readAllCustomers() {
     console.log("Repository: readAllCustomers");
 
+    const db = makeDb();
     var sql = "SELECT * FROM customer";
 
-    connection.query(sql, (err, result) => {
-        if (err) throw err;
-
+    try {
+        const result = await db.query(sql);
         console.log(result);
-    });
+
+        return result;
+    } catch (err) {
+        throw err;
+    } finally {
+        await db.close();
+    }
+
 }
 
-function readCustomerById() {
+async function readCustomerById(id) {
     console.log("Repository: readCustomerById");
+
+    const db = makeDb();
+    var sql = "SELECT * FROM customer WHERE id = ?";
+    var values = id;
+
+    try {
+        const result = await db.query(sql, values);
+        console.log(result);
+
+        return result[0];
+    } catch (err) {
+        throw err;
+    } finally {
+        await db.close();
+    }
 }
 
-function updateCustomerById() {
+async function updateCustomerById(id, customer) {
     console.log("Repository: updateCustomerById");
+
+    const db = makeDb();
+    var sql = "UPDATE customer SET cpf = ?, name = ?, birthDate = ? WHERE id = ?";
+    var values = [customer.cpf, customer.name, customer.birthDate, id];
+
+    try {
+        const result = await db.query(sql, values);
+        console.log(result);
+
+        return result;
+    } catch (err) {
+        throw err;
+    } finally {
+        await db.close();
+    }
 }
 
 function deleteCustomerById() {

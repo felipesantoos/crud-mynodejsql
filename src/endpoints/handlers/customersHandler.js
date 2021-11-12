@@ -5,38 +5,38 @@ const customersService = require("../../services/customersService");
 const messages = require("../../utils/messages");
 
 // Função de criação de um novo cliente.
-function createCustomer(req, res) {
+async function createCustomer(req, res) {
     console.log("Handler: createCustomer");
 
     const { cpf, name, birthDate } = req.body;
     const customer = new CustomerDTO(cpf, name, birthDate);
 
-    customersService.createCustomer(customer);
+    var newCustomerId = await customersService.createCustomer(customer);
 
-    console.log(messages.createSuccess);
-    res.json(messages.createSuccess);
+    console.log({id: newCustomerId});
+    res.json({id: newCustomerId});
 }
 
 // Função de listagem dos dados de todos os clientes.
-function readAllCustomers(req, res) {
+async function readAllCustomers(req, res) {
     console.log("Handler: readAllCustomers");
 
-    customersService.readAllCustomers();
+    const customers = await customersService.readAllCustomers();
 
-    console.log(messages.readSuccess);
-    res.json(messages.readSuccess);
+    console.log(customers);
+    res.json(customers);
 }
 
 // Função de listagem dos dados de um cliente específico.
-function readCustomerById(req, res) {
+async function readCustomerById(req, res) {
     console.log("Handler: readCustomerById");
 
     const { id } = req.params;
 
-    customersService.readCustomerById();
+    const customer = await customersService.readCustomerById(id);
 
-    console.log(messages.readSuccess);
-    res.json(messages.readSuccess);
+    console.log(customer);
+    res.json(customer);
 }
 
 // Função de atualização dos dados de um cliente específico.
@@ -46,7 +46,9 @@ function updateCustomerById(req, res) {
     const { id } = req.params;
     const { cpf, name, birthDate } = req.body;
 
-    customersService.updateCustomerById();
+    const customer = new CustomerDTO(cpf, name, birthDate);
+
+    customersService.updateCustomerById(id, customer);
 
     console.log(messages.updateSuccess);
     res.json(messages.updateSuccess);

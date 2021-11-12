@@ -1,27 +1,33 @@
 const customersRepository = require("../data/repository/customerRepository");
 
-function createCustomer(customer) {
+async function createCustomer(customer) {
     console.log("Service: createCustomer");
 
-    customersRepository.createCustomer(customer);
+    var newCustomerId = await customersRepository.createCustomer(customer);
+
+    return newCustomerId;
 }
 
-function readAllCustomers() {
+async function readAllCustomers() {
     console.log("Service: readAllCustomers");
 
-    customersRepository.readAllCustomers();
+    const customers = await customersRepository.readAllCustomers();
+
+    return customers;
 }
 
-function readCustomerById() {
+async function readCustomerById(id) {
     console.log("Service: readCustomerById");
 
-    customersRepository.readCustomerById();
+    const customer = await customersRepository.readCustomerById(id);
+
+    return customer;
 }
 
-function updateCustomerById() {
+function updateCustomerById(id, customer) {
     console.log("Service: updateCustomerById");
 
-    customersRepository.updateCustomerById();
+    customersRepository.updateCustomerById(id, customer);
 }
 
 function deleteCustomerById() {
