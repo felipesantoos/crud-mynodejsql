@@ -1,30 +1,29 @@
-// Importação do módulo do driver do MySQL.
+// Módulo do MySQL.
 const mysql = require("mysql");
 
-// Criação da conexão.
-const con = mysql.createConnection({
-    host: "localhost", // Computador.
-    user: "root", // Usuário.
-    password: "", // Senha.
-    database: "supermarket" // Banco de dados.
+// Configurações da conexão.
+var db_config = {
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "supermarket",
+};
+
+// Criação da variável de conexão.
+var connection = mysql.createConnection(db_config);
+
+// Estabelecimento de uma nova conexão.
+connection.connect((err) => {
+    if (err) {
+        console.log("Cannot establish a connection with the database.");
+
+        connection = reconnect(connection);
+    } else {
+        console.log("New connection established with the database.");
+    }
 });
-
-// Função que testa a conexão com o banco.
-function testConnection() {
-    // Se conecta.
-    con.connect((err) => {
-        // Verifica se houve algum erro (se sim, o lança).
-        if (err) throw err;
-        // Se não, mostra uma mensagem no console.
-        console.log("Database connected!");
-    });
-
-    // Fecha a conexão.
-    con.end();
-}
 
 // Exportação das funções.
 module.exports = {
-    con: con,
-    testConnection: testConnection,
+    connection: connection,
 };
