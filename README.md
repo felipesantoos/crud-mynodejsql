@@ -11,7 +11,7 @@ Um CRUD feito com Node.js e MySQL.
 - [x] Criar projeto em Node.js;
 - [x] Realizar a conexão com o banco de dados;
 - [x] Criar as rotas de cadastro, listagem (geral e individual), atualização e remoção;
-- [x] Criar as funções de cadastro, listagem (geral e individual), atualização e remoção;
+- [x] Criar as funções de cadastro, listagem (geral e individual), atualização e remoção.
 
 # Como rodar este projeto
 1. Clone o repositório com o comando `git clone https://github.com/felipesantosds/crud-mynodejsql.git`.
