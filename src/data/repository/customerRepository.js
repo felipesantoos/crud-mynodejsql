@@ -1,4 +1,5 @@
 const { getConnection, endConnection, makeDb } = require("../db/connection");
+const messages = require("../../utils/messages");
 
 async function createCustomer(customer) {
     console.log("Repository: createCustomer");
@@ -42,10 +43,9 @@ async function readCustomerById(id) {
 
     const db = makeDb();
     var sql = "SELECT * FROM customer WHERE id = ?";
-    var values = id;
 
     try {
-        const result = await db.query(sql, values);
+        const result = await db.query(sql, id);
         console.log(result);
 
         return result[0];
@@ -67,16 +67,40 @@ async function updateCustomerById(id, customer) {
         const result = await db.query(sql, values);
         console.log(result);
 
-        return result;
+        if (result.affectedRows == 1 && result.changedRows == 1) {
+            return messages.updateSuccess;
+        } else if (result.affectedRows == 1 && result.changedRows == 0) {
+            return messages.updateErrorSameValues;
+        } else {
+            return messages.updateErrorDataNotFound;
+        }
     } catch (err) {
-        throw err;
+        return messages.updateError;
     } finally {
         await db.close();
     }
 }
 
-function deleteCustomerById() {
+async function deleteCustomerById(id) {
     console.log("Repository: deleteCustomerById");
+
+    const db = makeDb();
+    var sql = "DELETE FROM customer WHERE id = ?";
+
+    try {
+        const result = await db.query(sql, id);
+        console.log(result);
+
+        if (result.affectedRows == 1) {
+            return messages.deleteSuccess;
+        } else {
+            return messages.deleteErrorDataNotFound;
+        }
+    } catch (err) {
+        return messages.deleteError;
+    } finally {
+        await db.close();
+    }
 }
 
 module.exports = {

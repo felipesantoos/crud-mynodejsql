@@ -40,7 +40,7 @@ async function readCustomerById(req, res) {
 }
 
 // Função de atualização dos dados de um cliente específico.
-function updateCustomerById(req, res) {
+async function updateCustomerById(req, res) {
     console.log("Handler: updateCustomerById");
     
     const { id } = req.params;
@@ -48,22 +48,22 @@ function updateCustomerById(req, res) {
 
     const customer = new CustomerDTO(cpf, name, birthDate);
 
-    customersService.updateCustomerById(id, customer);
+    const message = await customersService.updateCustomerById(id, customer);
 
-    console.log(messages.updateSuccess);
-    res.json(messages.updateSuccess);
+    console.log(message);
+    res.json(message);
 }
 
 // Função de remoção de um cliente específico.
-function deleteCustomerById(req, res) {
+async function deleteCustomerById(req, res) {
     console.log("Handler: deleteCustomerById");
 
     const { id } = req.params;
 
-    customersService.deleteCustomerById();
+    const message = await customersService.deleteCustomerById(id);
 
-    console.log(messages.deleteSuccess);
-    res.json(messages.deleteSuccess);
+    console.log(message);
+    res.json(message);
 }
 
 module.exports = {

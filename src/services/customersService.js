@@ -24,16 +24,20 @@ async function readCustomerById(id) {
     return customer;
 }
 
-function updateCustomerById(id, customer) {
+async function updateCustomerById(id, customer) {
     console.log("Service: updateCustomerById");
 
-    customersRepository.updateCustomerById(id, customer);
+    const message = await customersRepository.updateCustomerById(id, customer);
+
+    return message;
 }
 
-function deleteCustomerById() {
+async function deleteCustomerById(id) {
     console.log("Service: deleteCustomerById");
 
-    customersRepository.deleteCustomerById();
+    const message = await customersRepository.deleteCustomerById(id);
+
+    return message;
 }
 
 module.exports = {
